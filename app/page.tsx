@@ -1,5 +1,5 @@
-import { Room } from "./Room"
 import { CollaborativeApp } from "./collaborativeApp"
+import { Room } from "./Room"
 
 export default function Home() {
   return (
