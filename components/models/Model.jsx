@@ -130,7 +130,7 @@ export function Model() {
   const [selectedPiece, setSelectedPiece] = useState(null)
   const [boardState, setBoardState] = useState(initialBoardState)
 
-  // console.log("selectedPiece", selectedPiece)
+  console.log("selectedPiece", selectedPiece)
   console.log("boardState", boardState)
 
   const setBoardStateMutation = useMutation(({ storage }, newBoardState) => {
@@ -237,7 +237,10 @@ export function Model() {
                 pieceComponents[boardState[cell.id].piece] ? (
                   React.createElement(
                     pieceComponents[boardState[cell.id].piece],
-                    { position: [0, 0, 0] }
+                    {
+                      position:
+                        selectedPiece === cell.id ? [0, 0.5, 0] : [0, 0, 0], // Moves up when selected
+                    }
                   )
                 ) : (
                   <Html position={[0, 0.5, 0]}>
