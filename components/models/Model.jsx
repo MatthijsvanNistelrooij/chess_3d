@@ -126,11 +126,15 @@ const initialBoardState = {
 }
 
 export function Model() {
+  const root = useStorage((root) => root)
+  const others = useOthers()
   const grid = createGrid()
+
   const [selectedPiece, setSelectedPiece] = useState(null)
   const [boardState, setBoardState] = useState(initialBoardState)
-  const others = useOthers()
-
+  const [defeatedPieces, setDefeatedPieces] = useState(
+    root?.defeatedPieces || []
+  )
 
   const setBoardStateMutation = useMutation(({ storage }, newBoardState) => {
     storage.set("board", newBoardState)
@@ -140,11 +144,12 @@ export function Model() {
     storage.set("board", initialBoardState)
   }, [])
 
-  const root = useStorage((root) => root)
-
-
-  console.log("root", root)
-
+  const setDefeatedPiecesMutation = useMutation(
+    ({ storage }, newDefeatedPieces) => {
+      storage.set("defeatedPieces", newDefeatedPieces)
+    },
+    []
+  )
 
   useEffect(() => {
     if (root?.board) {
@@ -152,30 +157,30 @@ export function Model() {
     } else {
       setBoardStateMutation(initialBoardState)
     }
+    if (root?.defeatedPieces) {
+      setDefeatedPieces(root.defeatedPieces)
+    }
   }, [root, setBoardStateMutation])
 
-
   const handleClick = (cellId) => {
-    // If no piece is selected and the clicked square is empty, do nothing
     if (!selectedPiece && !boardState[cellId].piece) {
       return
     }
-
-    // If a piece is selected
     if (selectedPiece) {
-      // If the selected piece is clicked again, deselect it
       if (selectedPiece === cellId) {
         setSelectedPiece(null)
         return
       }
 
-      // If it's a valid move (piece selected and clicked on a square with a piece or empty square)
       const newBoardState = { ...boardState }
-      if (boardState[cellId].piece) {
+      if (boardState[cellId] && boardState[cellId].piece) {
+        const newDefeatedPieces = [...defeatedPieces, boardState[cellId].piece]
+        setDefeatedPiecesMutation(newDefeatedPieces)
+        setDefeatedPieces(newDefeatedPieces)
+
         newBoardState[cellId] = boardState[selectedPiece]
         newBoardState[selectedPiece] = null
       } else {
-        // Handle moving the selected piece to an empty square
         newBoardState[cellId] = boardState[selectedPiece]
         newBoardState[selectedPiece] = { piece: "", position: "0,0,0" }
       }
@@ -184,7 +189,6 @@ export function Model() {
       setBoardState(newBoardState)
       setSelectedPiece(null)
     } else {
-      // Set the selected piece if it's not null and the square contains a piece
       if (boardState[cellId].piece) {
         setSelectedPiece(cellId)
       }
@@ -193,7 +197,22 @@ export function Model() {
 
   const handleReset = () => {
     setInitialBoardState()
+    setDefeatedPieces([])
+    setDefeatedPiecesMutation([])
   }
+
+  const sortedDefeatedPieces = {
+    white: [],
+    black: [],
+  }
+
+  defeatedPieces.forEach((piece) => {
+    if (piece.includes("white")) {
+      sortedDefeatedPieces.white.push(piece)
+    } else if (piece.includes("black")) {
+      sortedDefeatedPieces.black.push(piece)
+    }
+  })
 
   return (
     <div style={{ height: "100vh", width: "100vw" }}>
@@ -216,7 +235,7 @@ export function Model() {
             Reset{" "}
           </button>
         </Html>
-        <OrbitControls />
+        <OrbitControls enableZoom={true} enableDamping />
 
         <Environment background preset="night" blur={2} />
         <directionalLight
@@ -237,7 +256,7 @@ export function Model() {
               <planeGeometry args={[0.9, 0.9]} />
             </mesh>
 
-            {boardState[cell.id] && (
+            {boardState[cell.id] && boardState[cell.id].piece && (
               <group position={[cell.position[0], 0, cell.position[2]]}>
                 {boardState[cell.id].piece &&
                 pieceComponents[boardState[cell.id].piece]
@@ -245,13 +264,35 @@ export function Model() {
                       pieceComponents[boardState[cell.id].piece],
                       {
                         position:
-                          selectedPiece === cell.id ? [0, 0.5, 0] : [0, 0, 0], // Moves up when selected
+                          selectedPiece === cell.id ? [0, 0.5, 0] : [0, 0, 0],
                       }
                     )
                   : null}
               </group>
             )}
           </React.Fragment>
+        ))}
+
+        {sortedDefeatedPieces.white.map((piece, index) => (
+          <group
+            key={`white-${index}`}
+            position={[6, -0.2, index * 0.7 - 5]}
+            className="border"
+          >
+            {pieceComponents[piece] &&
+              React.createElement(pieceComponents[piece])}
+          </group>
+        ))}
+
+        {sortedDefeatedPieces.black.map((piece, index) => (
+          <group
+            key={`black-${index}`}
+            position={[-6, -0.2, index * 0.7 - 5]}
+            className="border"
+          >
+            {pieceComponents[piece] &&
+              React.createElement(pieceComponents[piece])}
+          </group>
         ))}
       </Canvas>
     </div>
