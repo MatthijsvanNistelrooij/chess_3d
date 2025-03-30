@@ -2,7 +2,7 @@
 
 import { OrbitControls, Line, Environment, Html } from "@react-three/drei"
 import { Canvas } from "@react-three/fiber"
-import { useStorage, useMutation } from "@liveblocks/react/suspense"
+import { useStorage, useMutation, useOthers } from "@liveblocks/react/suspense"
 import React, { useState, useEffect } from "react"
 
 import { ChessBoard } from "./ChessBoard"
@@ -129,9 +129,8 @@ export function Model() {
   const grid = createGrid()
   const [selectedPiece, setSelectedPiece] = useState(null)
   const [boardState, setBoardState] = useState(initialBoardState)
+  const others = useOthers()
 
-  console.log("selectedPiece", selectedPiece)
-  console.log("boardState", boardState)
 
   const setBoardStateMutation = useMutation(({ storage }, newBoardState) => {
     storage.set("board", newBoardState)
@@ -143,6 +142,10 @@ export function Model() {
 
   const root = useStorage((root) => root)
 
+
+  console.log("root", root)
+
+
   useEffect(() => {
     if (root?.board) {
       setBoardState(root.board)
@@ -151,32 +154,58 @@ export function Model() {
     }
   }, [root, setBoardStateMutation])
 
+
   const handleClick = (cellId) => {
+    // If no piece is selected and the clicked square is empty, do nothing
+    if (!selectedPiece && !boardState[cellId].piece) {
+      return
+    }
+
+    // If a piece is selected
     if (selectedPiece) {
+      // If the selected piece is clicked again, deselect it
       if (selectedPiece === cellId) {
         setSelectedPiece(null)
         return
       }
 
+      // If it's a valid move (piece selected and clicked on a square with a piece or empty square)
       const newBoardState = { ...boardState }
-      newBoardState[cellId] = boardState[selectedPiece]
-      newBoardState[selectedPiece] = null
+      if (boardState[cellId].piece) {
+        newBoardState[cellId] = boardState[selectedPiece]
+        newBoardState[selectedPiece] = null
+      } else {
+        // Handle moving the selected piece to an empty square
+        newBoardState[cellId] = boardState[selectedPiece]
+        newBoardState[selectedPiece] = { piece: "", position: "0,0,0" }
+      }
 
       setBoardStateMutation(newBoardState)
       setBoardState(newBoardState)
       setSelectedPiece(null)
     } else {
-      setSelectedPiece(cellId)
+      // Set the selected piece if it's not null and the square contains a piece
+      if (boardState[cellId].piece) {
+        setSelectedPiece(cellId)
+      }
     }
   }
 
   const handleReset = () => {
-    console.log("Reset")
     setInitialBoardState()
   }
 
   return (
     <div style={{ height: "100vh", width: "100vw" }}>
+      <div className="flex text-center p-2">
+        Online users:
+        <div className="flex ml-2">
+          <div className="w-6 h-6 border-2 border-gray-500 bg-gradient-to-br from-gray-300 to-yellow-400 rounded-full"></div>
+          {others.length > 0 && (
+            <div className="w-6 h-6 border-2 -ml-2 border-gray-500 bg-gradient-to-br from-gray-300 to-yellow-400 rounded-full"></div>
+          )}
+        </div>
+      </div>
       <Canvas
         className="bg-gray-600"
         camera={{ position: [-15, 14, 15], fov: 15 }}
@@ -188,9 +217,7 @@ export function Model() {
           </button>
         </Html>
         <OrbitControls />
-        <ChessBoard position={[0, -0.18, 0]} />
-        {/* <axesHelper args={[5]} /> */}
-        <ambientLight color={"white"} intensity={0.1} />
+
         <Environment background preset="night" blur={2} />
         <directionalLight
           position={[15, 50, 5]}
@@ -198,55 +225,30 @@ export function Model() {
           castShadow
           shadow-mapSize={[2048, 2048]}
         />
+        <ChessBoard position={[0, -0.18, 0]} />
 
         {grid.map((cell) => (
           <React.Fragment key={cell.id}>
-            {/* <Line
-              points={[
-                [cell.position[0] - 0.5, 0, cell.position[2] - 0.5],
-                [cell.position[0] + 0.5, 0, cell.position[2] - 0.5],
-                [cell.position[0] + 0.5, 0, cell.position[2] + 0.5],
-                [cell.position[0] - 0.5, 0, cell.position[2] + 0.5],
-                [cell.position[0] - 0.5, 0, cell.position[2] - 0.5],
-              ]}
-              color={"red"}
-            /> */}
-
             <mesh
               rotation={[-Math.PI / 2, 0, 0]}
               position={[cell.position[0], -0.01, cell.position[2]]}
               onClick={() => handleClick(cell.id)}
             >
               <planeGeometry args={[0.9, 0.9]} />
-              {/* <Html>{cell.id}</Html>
-              <meshBasicMaterial color={"lightgreen"} opacity={0.8} /> */}
             </mesh>
 
-            {/* {boardState[cell.id] && (
-              <group position={[cell.position[0], 0, cell.position[2]]}>
-                <Html position={[0, 0.5, 0]}>
-                  {boardState[cell.id].piece}
-
-                  <div>HELLO</div>
-                </Html>
-              </group>
-            )} */}
             {boardState[cell.id] && (
               <group position={[cell.position[0], 0, cell.position[2]]}>
                 {boardState[cell.id].piece &&
-                pieceComponents[boardState[cell.id].piece] ? (
-                  React.createElement(
-                    pieceComponents[boardState[cell.id].piece],
-                    {
-                      position:
-                        selectedPiece === cell.id ? [0, 0.5, 0] : [0, 0, 0], // Moves up when selected
-                    }
-                  )
-                ) : (
-                  <Html position={[0, 0.5, 0]}>
-                    {/* <div>No Piece</div> */}
-                  </Html>
-                )}
+                pieceComponents[boardState[cell.id].piece]
+                  ? React.createElement(
+                      pieceComponents[boardState[cell.id].piece],
+                      {
+                        position:
+                          selectedPiece === cell.id ? [0, 0.5, 0] : [0, 0, 0], // Moves up when selected
+                      }
+                    )
+                  : null}
               </group>
             )}
           </React.Fragment>

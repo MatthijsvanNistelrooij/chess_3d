@@ -7,7 +7,13 @@ import {
   ClientSideSuspense,
 } from "@liveblocks/react/suspense"
 
-export function Room({ children }: { children: ReactNode }) {
+export function Room({
+  roomId,
+  children,
+}: {
+  roomId: string
+  children: ReactNode
+}) {
   const liveblocksKey = process.env.NEXT_PUBLIC_LIVEBLOCKS_PUBLIC_KEY
 
   if (!liveblocksKey) {
@@ -16,19 +22,15 @@ export function Room({ children }: { children: ReactNode }) {
     )
   }
 
-  console.log("children", children)
   return (
     <LiveblocksProvider publicApiKey={liveblocksKey}>
       <RoomProvider
-        id="my-room"
+        id={roomId}
         initialStorage={() => ({
           text: "Default Text",
         })}
       >
         <ClientSideSuspense fallback={<div>Loading…</div>}>
-          <div className="border w-full">
-            <p>Default Text</p>
-          </div>
           {children}
         </ClientSideSuspense>
       </RoomProvider>
