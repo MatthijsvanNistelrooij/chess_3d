@@ -200,7 +200,7 @@ export function Model() {
 
         {grid.map((cell) => (
           <React.Fragment key={cell.id}>
-            <Line
+            {/* <Line
               points={[
                 [cell.position[0] - 0.5, 0, cell.position[2] - 0.5],
                 [cell.position[0] + 0.5, 0, cell.position[2] - 0.5],
@@ -209,7 +209,7 @@ export function Model() {
                 [cell.position[0] - 0.5, 0, cell.position[2] - 0.5],
               ]}
               color={"red"}
-            />
+            /> */}
 
             <mesh
               rotation={[-Math.PI / 2, 0, 0]}
@@ -217,8 +217,8 @@ export function Model() {
               onClick={() => handleClick(cell.id)}
             >
               <planeGeometry args={[0.9, 0.9]} />
-              {/* <Html>{cell.id}</Html> */}
-              <meshBasicMaterial color={"lightgreen"} opacity={0.8} />
+              {/* <Html>{cell.id}</Html>
+              <meshBasicMaterial color={"lightgreen"} opacity={0.8} /> */}
             </mesh>
 
             {/* {boardState[cell.id] && (
