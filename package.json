@@ -11,8 +11,8 @@
   "dependencies": {
     "@liveblocks/client": "^2.22.2",
     "@liveblocks/react": "^2.22.2",
-    "@react-three/drei": "^9.122.0",
-    "@react-three/fiber": "^8.18.0",
+    "@react-three/drei": "^10.0.5",
+    "@react-three/fiber": "^9.1.0",
     "next": "15.2.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

@@ -6,6 +6,8 @@ import {
   RoomProvider,
   ClientSideSuspense,
 } from "@liveblocks/react/suspense"
+import { Canvas } from "@react-three/fiber"
+import { Html } from "@react-three/drei"
 
 export function Room({ children }: { children: ReactNode }) {
   const liveblocksKey = process.env.NEXT_PUBLIC_LIVEBLOCKS_PUBLIC_KEY
@@ -30,6 +32,9 @@ export function Room({ children }: { children: ReactNode }) {
             <p>Default Text</p>
           </div>
           {children}
+          <Canvas className="bg-red-200">
+            <Html>HELLO</Html>
+          </Canvas>
         </ClientSideSuspense>
       </RoomProvider>
     </LiveblocksProvider>
