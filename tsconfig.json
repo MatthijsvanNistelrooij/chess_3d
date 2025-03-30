@@ -23,6 +23,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/models/ChessBoard.jsx", "app/collaborativeApp.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/models/ChessBoard.jsx", "app/collaborativeApp.jsx", "components/models/Model.jsx"],
   "exclude": ["node_modules"]
 }
