@@ -180,6 +180,7 @@ export function Model() {
       <Canvas
         className="bg-gray-600"
         camera={{ position: [-15, 14, 15], fov: 15 }}
+        shadows
       >
         <Html fullscreen>
           <button onClick={handleReset} className="bg-emerald-500">

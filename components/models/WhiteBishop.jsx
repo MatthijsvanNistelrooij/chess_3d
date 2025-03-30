@@ -15,7 +15,7 @@ export function WhiteBishop(props) {
   const { nodes, materials } = useGLTF("/models/glass.glb")
   return (
     <group {...props} dispose={null}>
-      <group scale={0.05}>
+      <group scale={0.05} rotation={[0, 1.5, 0]}>
         <group rotation={[-Math.PI / 2, 0, 0]} scale={100}>
           <mesh
             castShadow
