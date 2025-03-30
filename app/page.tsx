@@ -1,10 +1,10 @@
-import { Model } from "@/components/models/Model"
 import { Room } from "./Room"
+import { CollaborativeApp } from "./collaborativeApp"
 
 export default function Home() {
   return (
     <Room>
-      <Model />
+      <CollaborativeApp />
     </Room>
   )
 }

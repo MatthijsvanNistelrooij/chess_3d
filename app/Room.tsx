@@ -32,9 +32,6 @@ export function Room({ children }: { children: ReactNode }) {
             <p>Default Text</p>
           </div>
           {children}
-          <Canvas className="bg-red-200">
-            <Html>HELLO</Html>
-          </Canvas>
         </ClientSideSuspense>
       </RoomProvider>
     </LiveblocksProvider>
