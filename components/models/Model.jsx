@@ -268,7 +268,7 @@ export function Model() {
             {boardState[cell.id] && boardState[cell.id].piece && (
               <group
                 position={[cell.position[0], 0, cell.position[2]]}
-                scale={0.85}
+                scale={0.9}
               >
                 {boardState[cell.id].piece &&
                 pieceComponents[boardState[cell.id].piece]
@@ -289,7 +289,7 @@ export function Model() {
           <group
             key={`white-${index}`}
             position={[6, -0.2, index * 0.7 - 5]}
-            scale={0.85}
+            scale={0.9}
           >
             {pieceComponents[piece] &&
               React.createElement(pieceComponents[piece])}
@@ -300,7 +300,7 @@ export function Model() {
           <group
             key={`black-${index}`}
             position={[-6, -0.2, index * 0.7 - 5]}
-            scale={0.85}
+            scale={0.9}
           >
             {pieceComponents[piece] &&
               React.createElement(pieceComponents[piece])}
