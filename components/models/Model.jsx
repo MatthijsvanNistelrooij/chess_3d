@@ -125,13 +125,6 @@ const initialBoardState = {
   H8: { piece: "blackrook", position: "0,0,0" },
 }
 
-const presets = [
-  { name: "sunset", color: "#CBC3E3" },
-  { name: "night", color: "#7f7053 " },
-  { name: "forest", color: "#C4A480" },
-  { name: "park", color: "#82A67D" },
-]
-
 export function Model() {
   const root = useStorage((root) => root)
   const others = useOthers()
@@ -241,35 +234,17 @@ export function Model() {
             )}
           </div>
         </div>
-        <div className="flex flex-col md:flex-row gap-4 text-center justify-center">
-          <div className="flex items-center gap-2 text-center justify-center">
-            <input
-              type="range"
-              min="0.5"
-              max="1"
-              step="0.05"
-              value={pieceSize}
-              onChange={(e) => setPieceSize(parseFloat(e.target.value))}
-              className="cursor-pointer accent-black"
-            />
-          </div>
-          {/* <div className="bg-gray-800 bg-opacity-50 p-1 px-5 rounded-lg gap-5 flex">
-            {presets.map((preset) => (
-              <button
-                key={preset.name}
-                onClick={() => setEnv(preset.name)}
-                className="w-4 h-4 rounded-full border-2 transition-all"
-                style={{
-                  backgroundColor: preset.color,
-                  borderColor: env === preset.name ? "white" : "transparent",
-                  boxShadow:
-                    env === preset.name
-                      ? "0 0 10px rgba(255, 255, 255, 0.8)"
-                      : "none",
-                }}
-              />
-            ))}
-          </div> */}
+
+        <div className="flex items-center gap-2 text-center justify-center">
+          <input
+            type="range"
+            min="0.5"
+            max="1"
+            step="0.05"
+            value={pieceSize}
+            onChange={(e) => setPieceSize(parseFloat(e.target.value))}
+            className="cursor-pointer accent-black"
+          />
         </div>
 
         <button
