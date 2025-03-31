@@ -218,11 +218,11 @@ export function Model() {
     <div style={{ height: "100vh", width: "100vw" }}>
       <div className="flex justify-between text-center p-2 px-8">
         <div className="flex">
-          Online users:
+          Users in room:
           <div className="flex ml-2">
-            <div className="w-6 h-6 border-2 border-gray-500 bg-gradient-to-br from-gray-300 to-yellow-400 rounded-full"></div>
+            <div className="w-6 h-6 border-2 border-gray-500 bg-gradient-to-br from-gray-300 to-green-400 rounded-full"></div>
             {others.length > 0 && (
-              <div className="w-6 h-6 border-2 -ml-2 border-gray-500 bg-gradient-to-br from-gray-300 to-yellow-400 rounded-full"></div>
+              <div className="w-6 h-6 border-2 -ml-2 border-gray-500 bg-gradient-to-br from-gray-300 to-green-400 rounded-full"></div>
             )}
           </div>
         </div>
@@ -235,8 +235,8 @@ export function Model() {
         </button>
       </div>
       <Canvas
-        className="bg-gray-600 max-w-[100%]"
-        camera={{ position: [-15, 14, 15], fov: 15 }}
+        className="bg-gray-600"
+        camera={{ position: [-15, 14, 15], fov: 25 }}
         shadows
       >
         <OrbitControls enableZoom={true} enableDamping />
