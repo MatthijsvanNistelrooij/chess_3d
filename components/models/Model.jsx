@@ -218,7 +218,7 @@ export function Model() {
     <div style={{ height: "100vh", width: "100vw" }}>
       <div className="flex justify-between text-center p-2 px-8">
         <div className="flex">
-          Users in room:
+          Users
           <div className="flex ml-2">
             <div className="w-6 h-6 border-2 border-gray-500 bg-gradient-to-br from-gray-300 to-green-400 rounded-full"></div>
             {others.length > 0 && (
