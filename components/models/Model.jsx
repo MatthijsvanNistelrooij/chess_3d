@@ -217,7 +217,7 @@ export function Model() {
 
   return (
     <div style={{ height: "100vh", width: "100vw" }}>
-      <div className="flex justify-between text-center p-2 px-8">
+      <div className="flex justify-between text-center p-2 px-2 md:px-8">
         <div className="flex">
           <h1>Users</h1>
           <div className="flex ml-2">
