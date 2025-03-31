@@ -46,3 +46,39 @@ body {
 .text-shadow-gold {
   text-shadow: 2px 10px 10px rgb(31, 27, 5);
 }
+
+.slider {
+  @apply w-full h-2 bg-transparent; /* Tailwind for width and height */
+  -webkit-appearance: none;
+  outline: none;
+}
+
+.slider::-webkit-slider-runnable-track {
+  background: #1d1d1d;
+  height: 0.5rem;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: #3f3f3f;
+  border-radius: 50%;
+  width: 1rem;
+  height: 1rem;
+  cursor: pointer;
+  margin-top: -0.25rem; /* Adjusts the thumb vertically */
+}
+
+.slider::-moz-range-track {
+  background: #053a5f;
+  height: 0.5rem;
+}
+
+.slider::-moz-range-thumb {
+  background-color: #4fd1c5;
+  border-radius: 50%;
+  width: 1rem;
+  height: 1rem;
+  cursor: pointer;
+  margin-top: -0.25rem; /* Adjusts the thumb vertically */
+}

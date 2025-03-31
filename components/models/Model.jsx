@@ -243,13 +243,13 @@ export function Model() {
             step="0.05"
             value={pieceSize}
             onChange={(e) => setPieceSize(parseFloat(e.target.value))}
-            className="cursor-pointer accent-black"
+            className="slider cursor-pointer accent-black"
           />
         </div>
 
         <button
           onClick={handleReset}
-          className="bg-emerald-500 hover:bg-emerald-700 text-sm px-2 rounded cursor-pointer h-6"
+          className="bg-emerald-500 hover:bg-emerald-600 text-sm px-2 rounded cursor-pointer h-6"
         >
           Reset
         </button>
