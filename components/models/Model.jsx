@@ -257,10 +257,10 @@ export function Model() {
         shadows
       >
         <OrbitControls enableZoom={true} enableDamping />
-        <Environment background preset="night" blur={2} />
+        <Environment background preset="night" blur={0.2} />
         <directionalLight
           position={[15, 50, 5]}
-          intensity={4}
+          intensity={5}
           castShadow
           shadow-mapSize={[2048, 2048]}
         />
