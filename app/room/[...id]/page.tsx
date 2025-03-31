@@ -11,8 +11,6 @@ const PrivateRoom = () => {
 
   if (!roomId) return <p>Loading...</p>
 
-  console.log("roomId", roomId)
-
   return (
     <Room roomId={roomId as string}>
       <Model />

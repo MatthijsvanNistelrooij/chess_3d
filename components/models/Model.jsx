@@ -216,27 +216,30 @@ export function Model() {
 
   return (
     <div style={{ height: "100vh", width: "100vw" }}>
-      <div className="flex text-center p-2">
-        Online users:
-        <div className="flex ml-2">
-          <div className="w-6 h-6 border-2 border-gray-500 bg-gradient-to-br from-gray-300 to-yellow-400 rounded-full"></div>
-          {others.length > 0 && (
-            <div className="w-6 h-6 border-2 -ml-2 border-gray-500 bg-gradient-to-br from-gray-300 to-yellow-400 rounded-full"></div>
-          )}
+      <div className="flex justify-between text-center p-2 px-8">
+        <div className="flex">
+          Online users:
+          <div className="flex ml-2">
+            <div className="w-6 h-6 border-2 border-gray-500 bg-gradient-to-br from-gray-300 to-yellow-400 rounded-full"></div>
+            {others.length > 0 && (
+              <div className="w-6 h-6 border-2 -ml-2 border-gray-500 bg-gradient-to-br from-gray-300 to-yellow-400 rounded-full"></div>
+            )}
+          </div>
         </div>
+
+        <button
+          onClick={handleReset}
+          className="bg-emerald-500 hover:bg-emerald-700 text-sm p-1 px-2 rounded cursor-pointer"
+        >
+          Reset
+        </button>
       </div>
       <Canvas
-        className="bg-gray-600"
+        className="bg-gray-600 max-w-[100%]"
         camera={{ position: [-15, 14, 15], fov: 15 }}
         shadows
       >
-        <Html fullscreen>
-          <button onClick={handleReset} className="bg-emerald-500">
-            Reset{" "}
-          </button>
-        </Html>
         <OrbitControls enableZoom={true} enableDamping />
-
         <Environment background preset="night" blur={2} />
         <directionalLight
           position={[15, 50, 5]}
