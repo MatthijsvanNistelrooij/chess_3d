@@ -218,11 +218,17 @@ export function Model() {
     <div style={{ height: "100vh", width: "100vw" }}>
       <div className="flex justify-between text-center p-2 px-8">
         <div className="flex">
-          Users
+          <h1>Users</h1>
           <div className="flex ml-2">
-            <div className="w-6 h-6 border-2 border-gray-500 bg-gradient-to-br from-gray-300 to-green-400 rounded-full"></div>
+            <div
+              className="w-6 h-6 border-2 border-gray-500 bg-gradient-to-br from-gray-300 to-green-400 rounded-full"
+              title="You"
+            ></div>
             {others.length > 0 && (
-              <div className="w-6 h-6 border-2 -ml-2 border-gray-500 bg-gradient-to-br from-gray-300 to-green-400 rounded-full"></div>
+              <div
+                className="w-6 h-6 border-2 -ml-2 border-gray-500 bg-gradient-to-br from-gray-300 to-orange-400 rounded-full "
+                title="Guest"
+              ></div>
             )}
           </div>
         </div>
@@ -260,7 +266,10 @@ export function Model() {
             </mesh>
 
             {boardState[cell.id] && boardState[cell.id].piece && (
-              <group position={[cell.position[0], 0, cell.position[2]]}>
+              <group
+                position={[cell.position[0], 0, cell.position[2]]}
+                scale={0.85}
+              >
                 {boardState[cell.id].piece &&
                 pieceComponents[boardState[cell.id].piece]
                   ? React.createElement(
@@ -280,7 +289,7 @@ export function Model() {
           <group
             key={`white-${index}`}
             position={[6, -0.2, index * 0.7 - 5]}
-            className="border"
+            scale={0.85}
           >
             {pieceComponents[piece] &&
               React.createElement(pieceComponents[piece])}
@@ -291,7 +300,7 @@ export function Model() {
           <group
             key={`black-${index}`}
             position={[-6, -0.2, index * 0.7 - 5]}
-            className="border"
+            scale={0.85}
           >
             {pieceComponents[piece] &&
               React.createElement(pieceComponents[piece])}
