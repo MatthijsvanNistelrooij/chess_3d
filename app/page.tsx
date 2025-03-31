@@ -16,7 +16,7 @@ export default function Home() {
       className="w-full h-screen flex flex-col justify-end text-center gap-10 px-6"
       id="banner"
     >
-      <h1 className="text-5xl md:text-6xl font-extrabold text-yellow-300 drop-shadow-md">
+      <h1 className="text-5xl md:text-6xl font-extrabold text-yellow-300 drop-shadow-md text-shadow-gold">
         Welcome to <span className="text-yellow-200 text-shadow-gold">Chess 3D ♕</span>
       </h1>
 

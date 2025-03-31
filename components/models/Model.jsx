@@ -216,10 +216,13 @@ export function Model() {
     }
   })
 
+
+
   return (
     <div className="w-full h-screen">
       <div className="flex justify-between text-center p-2 px-2 md:px-8">
         <div className="flex">
+
           <h1>Users</h1>
           <div className="flex ml-2">
             <div
