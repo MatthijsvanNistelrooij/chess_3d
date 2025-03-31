@@ -234,7 +234,6 @@ export function Model() {
           </div>
         </div>
         <div className="flex items-center gap-2">
-          <label className="text-sm">Piece Size:</label>
           <input
             type="range"
             min="0.5"
@@ -244,7 +243,6 @@ export function Model() {
             onChange={(e) => setPieceSize(parseFloat(e.target.value))}
             className="cursor-pointer accent-black"
           />
-          <span className="text-sm">{pieceSize.toFixed(2)}</span>
         </div>
         <button
           onClick={handleReset}
