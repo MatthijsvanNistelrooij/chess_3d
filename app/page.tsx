@@ -12,10 +12,18 @@ export default function Home() {
   }
 
   return (
-    <div className="w-full h-screen flex flex-col justify-center text-center gap-10" id="banner">
-      <h1>Welcome to Chess 3D ♕</h1>
+    <div
+      className="w-full h-screen flex flex-col justify-center text-center gap-10 px-6"
+      id="banner"
+    >
+      <h1 className="text-5xl md:text-6xl font-extrabold text-yellow-300 drop-shadow-md">
+        Welcome to <span className="text-yellow-400">Chess 3D ♕</span>
+      </h1>
+
       <button
-        className="mx-auto border p-3 px-12 bg-black border-white hover:bg-[#0a0a0a] cursor-pointer"
+        className="mx-auto border-2 border-yellow-500 text-yellow-300 px-12 py-3 rounded-lg 
+                   bg-gradient-to-br from-yellow-700 to-yellow-900 hover:from-yellow-600 
+                   hover:to-yellow-800 transition-all duration-300 shadow-lg hover:shadow-xl cursor-pointer"
         onClick={createRoom}
       >
         Create Private Room
