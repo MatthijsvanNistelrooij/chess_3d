@@ -28,3 +28,9 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+#banner { 
+  background-image: url('../app/chessmaster3d.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+}

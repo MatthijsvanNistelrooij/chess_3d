@@ -12,10 +12,10 @@ export default function Home() {
   }
 
   return (
-    <div className="w-full h-screen flex flex-col justify-center text-center gap-10">
-      <h1>Welcome to 3D Chess ♕</h1>
+    <div className="w-full h-screen flex flex-col justify-center text-center gap-10" id="banner">
+      <h1>Welcome to Chess 3D ♕</h1>
       <button
-        className="mx-auto border p-3 border-white w-80 hover:bg-gray-900 cursor-pointer"
+        className="mx-auto border p-3 px-12 bg-black border-white hover:bg-[#0a0a0a] cursor-pointer"
         onClick={createRoom}
       >
         Create Private Room
