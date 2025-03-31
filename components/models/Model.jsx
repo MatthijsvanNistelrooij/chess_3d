@@ -129,6 +129,7 @@ export function Model() {
   const root = useStorage((root) => root)
   const others = useOthers()
   const grid = createGrid()
+  const [pieceSize, setPieceSize] = useState(1)
 
   const [selectedPiece, setSelectedPiece] = useState(null)
   const [boardState, setBoardState] = useState(initialBoardState)
@@ -232,7 +233,19 @@ export function Model() {
             )}
           </div>
         </div>
-
+        <div className="flex items-center gap-2">
+          <label className="text-sm">Piece Size:</label>
+          <input
+            type="range"
+            min="0.5"
+            max="1"
+            step="0.05"
+            value={pieceSize}
+            onChange={(e) => setPieceSize(parseFloat(e.target.value))}
+            className="cursor-pointer accent-black"
+          />
+          <span className="text-sm">{pieceSize.toFixed(2)}</span>
+        </div>
         <button
           onClick={handleReset}
           className="bg-emerald-500 hover:bg-emerald-700 text-sm p-1 px-2 rounded cursor-pointer"
@@ -268,7 +281,7 @@ export function Model() {
             {boardState[cell.id] && boardState[cell.id].piece && (
               <group
                 position={[cell.position[0], 0, cell.position[2]]}
-                scale={0.9}
+                scale={pieceSize}
               >
                 {boardState[cell.id].piece &&
                 pieceComponents[boardState[cell.id].piece]
@@ -289,7 +302,7 @@ export function Model() {
           <group
             key={`white-${index}`}
             position={[6, -0.2, index * 0.7 - 5]}
-            scale={0.9}
+            scale={pieceSize}
           >
             {pieceComponents[piece] &&
               React.createElement(pieceComponents[piece])}
@@ -300,7 +313,7 @@ export function Model() {
           <group
             key={`black-${index}`}
             position={[-6, -0.2, index * 0.7 - 5]}
-            scale={0.9}
+            scale={pieceSize}
           >
             {pieceComponents[piece] &&
               React.createElement(pieceComponents[piece])}
