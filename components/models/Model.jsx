@@ -224,7 +224,7 @@ export function Model() {
   })
 
   return (
-    <div style={{ height: "100vh", width: "100vw" }}>
+    <div className="w-full h-screen">
       <div className="flex justify-between text-center p-2 px-2 md:px-8">
         <div className="flex">
           <h1>Users</h1>
@@ -253,7 +253,7 @@ export function Model() {
               className="cursor-pointer accent-black"
             />
           </div>
-          <div className="bg-gray-800 bg-opacity-50 p-2 px-5 rounded-lg gap-5 flex">
+          {/* <div className="bg-gray-800 bg-opacity-50 p-1 px-5 rounded-lg gap-5 flex">
             {presets.map((preset) => (
               <button
                 key={preset.name}
@@ -269,12 +269,12 @@ export function Model() {
                 }}
               />
             ))}
-          </div>
+          </div> */}
         </div>
 
         <button
           onClick={handleReset}
-          className="bg-emerald-500 hover:bg-emerald-700 text-sm p-1 px-2 rounded cursor-pointer h-8"
+          className="bg-emerald-500 hover:bg-emerald-700 text-sm px-2 rounded cursor-pointer h-6"
         >
           Reset
         </button>
@@ -284,8 +284,8 @@ export function Model() {
         camera={{ position: [-15, 14, 15], fov: 25 }}
         shadows
       >
-        <OrbitControls enableZoom={true} enableDamping />
-        <Environment background preset={env} blur={2} />
+        <OrbitControls enableZoom={true} enableDamping enablePan={false} />
+        <Environment background preset={"forest"} blur={2} />
         <directionalLight
           position={[15, 50, 5]}
           intensity={5}
