@@ -216,13 +216,10 @@ export function Model() {
     }
   })
 
-
-
   return (
     <div className="w-full h-screen">
       <div className="flex justify-between text-center p-2 px-2 md:px-8">
         <div className="flex">
-
           <h1>Users</h1>
           <div className="flex ml-2">
             <div
@@ -248,14 +245,13 @@ export function Model() {
             onChange={(e) => setPieceSize(parseFloat(e.target.value))}
             className="slider cursor-pointer accent-black"
           />
+          <button
+            onClick={handleReset}
+            className="bg-emerald-500 hover:bg-emerald-600 text-sm px-2 rounded cursor-pointer h-6 ml-10"
+          >
+            Reset
+          </button>
         </div>
-
-        <button
-          onClick={handleReset}
-          className="bg-emerald-500 hover:bg-emerald-600 text-sm px-2 rounded cursor-pointer h-6"
-        >
-          Reset
-        </button>
       </div>
       <Canvas
         className="bg-gray-600"
