@@ -125,12 +125,20 @@ const initialBoardState = {
   H8: { piece: "blackrook", position: "0,0,0" },
 }
 
+const presets = [
+  { name: "sunset", color: "#CBC3E3" },
+  { name: "night", color: "#7f7053 " },
+  { name: "forest", color: "#C4A480" },
+  { name: "park", color: "#82A67D" },
+]
+
 export function Model() {
   const root = useStorage((root) => root)
   const others = useOthers()
   const grid = createGrid()
-  const [pieceSize, setPieceSize] = useState(1)
 
+  const [env, setEnv] = useState("sunset")
+  const [pieceSize, setPieceSize] = useState(1)
   const [selectedPiece, setSelectedPiece] = useState(null)
   const [boardState, setBoardState] = useState(initialBoardState)
   const [defeatedPieces, setDefeatedPieces] = useState(
@@ -233,20 +241,40 @@ export function Model() {
             )}
           </div>
         </div>
-        <div className="flex items-center gap-2">
-          <input
-            type="range"
-            min="0.5"
-            max="1"
-            step="0.05"
-            value={pieceSize}
-            onChange={(e) => setPieceSize(parseFloat(e.target.value))}
-            className="cursor-pointer accent-black"
-          />
+        <div className="flex flex-col md:flex-row gap-4 text-center justify-center">
+          <div className="flex items-center gap-2 text-center justify-center">
+            <input
+              type="range"
+              min="0.5"
+              max="1"
+              step="0.05"
+              value={pieceSize}
+              onChange={(e) => setPieceSize(parseFloat(e.target.value))}
+              className="cursor-pointer accent-black"
+            />
+          </div>
+          <div className="bg-gray-800 bg-opacity-50 p-2 px-5 rounded-lg gap-5 flex">
+            {presets.map((preset) => (
+              <button
+                key={preset.name}
+                onClick={() => setEnv(preset.name)}
+                className="w-4 h-4 rounded-full border-2 transition-all"
+                style={{
+                  backgroundColor: preset.color,
+                  borderColor: env === preset.name ? "white" : "transparent",
+                  boxShadow:
+                    env === preset.name
+                      ? "0 0 10px rgba(255, 255, 255, 0.8)"
+                      : "none",
+                }}
+              />
+            ))}
+          </div>
         </div>
+
         <button
           onClick={handleReset}
-          className="bg-emerald-500 hover:bg-emerald-700 text-sm p-1 px-2 rounded cursor-pointer"
+          className="bg-emerald-500 hover:bg-emerald-700 text-sm p-1 px-2 rounded cursor-pointer h-8"
         >
           Reset
         </button>
@@ -257,7 +285,7 @@ export function Model() {
         shadows
       >
         <OrbitControls enableZoom={true} enableDamping />
-        <Environment background preset="night" blur={2} />
+        <Environment background preset={env} blur={2} />
         <directionalLight
           position={[15, 50, 5]}
           intensity={5}
