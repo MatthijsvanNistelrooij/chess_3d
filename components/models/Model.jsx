@@ -265,6 +265,8 @@ export function Model() {
           intensity={5}
           castShadow
           shadow-mapSize={[2048, 2048]}
+          shadow-bias={-0.0001}
+
         />
         <ChessBoard position={[0, -0.18, 0]} />
 
