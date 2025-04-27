@@ -15,7 +15,7 @@ export function BlackKnight(props) {
   const { nodes, materials } = useGLTF("/models/glass.glb")
   return (
     <group {...props} dispose={null}>
-      <group scale={0.05} position={[0, 0.86, 0.2]} rotation={[0, 3, 0]}>
+      <group scale={0.05} position={[0, 0.86, 0.1]} rotation={[0, 3, 0]}>
         <mesh
           castShadow
           receiveShadow

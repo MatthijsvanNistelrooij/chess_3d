@@ -266,9 +266,8 @@ export function Model() {
           castShadow
           shadow-mapSize={[2048, 2048]}
           shadow-bias={-0.0001}
-
         />
-        <ChessBoard position={[0, -0.18, 0]} />
+        <ChessBoard position={[0, -0.18, 0]} scale={1.05} />
 
         {grid.map((cell) => (
           <React.Fragment key={cell.id}>
