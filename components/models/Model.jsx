@@ -258,7 +258,16 @@ export function Model() {
         camera={{ position: [-15, 14, 15], fov: 25 }}
         shadows
       >
-        <OrbitControls enableZoom={true} enableDamping enablePan={false} />
+        <OrbitControls
+          enablePan={false}
+          enableZoom={true}
+          minDistance={20}
+          maxDistance={40}
+          minPolarAngle={Math.PI / 4}
+          maxPolarAngle={Math.PI / 2}
+          minAzimuthAngle={-Math.PI / 2 }
+          maxAzimuthAngle={Math.PI / 2}
+        />
         <Environment background preset={"forest"} blur={2} />
         <directionalLight
           position={[15, 50, 5]}
