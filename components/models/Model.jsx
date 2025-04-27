@@ -265,13 +265,13 @@ export function Model() {
           maxDistance={40}
           minPolarAngle={Math.PI / 4}
           maxPolarAngle={Math.PI / 2}
-          minAzimuthAngle={-Math.PI / 2 }
+          minAzimuthAngle={-Math.PI / 2}
           maxAzimuthAngle={Math.PI / 2}
         />
-        <Environment background preset={"forest"} blur={2} />
+        <Environment background preset={"night"} blur={2} />
         <directionalLight
           position={[15, 50, 5]}
-          intensity={5}
+          intensity={4}
           castShadow
           shadow-mapSize={[2048, 2048]}
           shadow-bias={-0.0001}
