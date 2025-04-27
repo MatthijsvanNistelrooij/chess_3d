@@ -263,7 +263,7 @@ export function Model() {
           enableZoom={true}
           minDistance={20}
           maxDistance={40}
-          minPolarAngle={Math.PI / 4}
+          minPolarAngle={Math.PI / 6}
           maxPolarAngle={Math.PI / 2}
           minAzimuthAngle={-Math.PI / 2}
           maxAzimuthAngle={Math.PI / 2}
