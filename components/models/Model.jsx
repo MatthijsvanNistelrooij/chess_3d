@@ -265,8 +265,8 @@ export function Model() {
           maxDistance={40}
           minPolarAngle={Math.PI / 6}
           maxPolarAngle={Math.PI / 2}
-          minAzimuthAngle={-Math.PI / 2}
-          maxAzimuthAngle={Math.PI / 2}
+          minAzimuthAngle={-Math.PI / 1}
+          maxAzimuthAngle={Math.PI / 1}
         />
         <Environment background preset={"night"} blur={2} />
         <directionalLight
