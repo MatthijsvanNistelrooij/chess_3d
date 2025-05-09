@@ -19,6 +19,8 @@ import { WhiteKing } from "./WhiteKing"
 import { BlackPawn } from "./BlackPawn"
 import { WhitePawn } from "./WhitePawn"
 
+import { Floor } from "../Floor"
+
 const pieceComponents = {
   blackbishop: BlackBishop,
   whitebishop: WhiteBishop,
@@ -258,6 +260,9 @@ export function Model() {
         camera={{ position: [-15, 14, 15], fov: 25 }}
         shadows
       >
+        <Floor position={[0, -20, 0]} />
+        <color attach="background" args={["#000"]} />
+        <fog attach="fog" args={["#000", 5, 200]} />
         <OrbitControls
           enablePan={false}
           enableZoom={true}
@@ -268,7 +273,7 @@ export function Model() {
           minAzimuthAngle={-Math.PI / 1}
           maxAzimuthAngle={Math.PI / 1}
         />
-        <Environment background preset={"night"} blur={2} />
+        <Environment preset={"sunset"} blur={2} />
         <directionalLight
           position={[15, 50, 5]}
           intensity={4}
